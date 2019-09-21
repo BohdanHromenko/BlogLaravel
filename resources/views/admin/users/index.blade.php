@@ -1,9 +1,7 @@
 @extends('admin.layout')
 
 @section('content')
-    @php
-    /** @var \App\Category $category */
-    @endphp
+    <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
@@ -24,29 +22,34 @@
             <!-- Default box -->
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Листинг сущности</h3>
+                    <h3 class="box-title">Список пользователей</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
                     <div class="form-group">
-                        <a href="{{ route('categories.create') }}" class="btn btn-success">Добавить</a>
+                        <a href="{{ route('users.create') }}" class="btn btn-success">Добавить</a>
                     </div>
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Название</th>
+                            <th>Имя</th>
+                            <th>E-mail</th>
+                            <th>Аватар</th>
                             <th>Действия</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($categories as $category)
+                        @foreach ($users as $user)
                             <tr>
-                                <td>{{ $category->id }}</td>
-                                <td>{{ $category->title }}</td>
-                                <td><a href="{{ route('categories.edit', $category->id) }}" class="fa fa-pencil"></a>
-
-                                    {{ Form::open(['route'=>['categories.destroy', $category->id], 'method'=>'delete']) }}
+                                <td>{{ $user->id }}</td>
+                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->email }}</td>
+                                <td>
+                                    <img src="{{ $user->getAvatar() }}" alt="" class="img-responsive" width="150">
+                                </td>
+                                <td><a href="{{ route('users.edit', $user->id) }}" class="fa fa-pencil"></a>
+                                    {{ Form::open(['route'=>['users.destroy', $user->id], 'method'=>'delete']) }}
                                     <button onclick="return confirm('Are you sure?')" type="submit" class="delete">
                                         <i class="fa fa-remove"></i>
                                     </button>
@@ -64,4 +67,5 @@
         </section>
         <!-- /.content -->
     </div>
+    <!-- /.content-wrapper -->
 @endsection
