@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
+use App\Post;
+use App\Tag;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -13,7 +16,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('pages.index');
+        $posts = Post::paginate(2);
+
+        return view('pages.index', compact('posts'));
     }
 
     /**
@@ -43,9 +48,10 @@ class HomeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        $post = Post::where('slug', $slug)->firstOrFail();
+        return view('pages.show')->with('post', $post);
     }
 
     /**
@@ -80,5 +86,29 @@ class HomeController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * @param $slug
+     */
+    public function tag($slug)
+    {
+        $tag = Tag::where('slug', $slug)->firstOrFail();
+
+        $posts = $tag->posts()->paginate(2);
+
+        return view('pages.list', ['posts' => $posts]);
+    }
+
+    /**
+     * @param $slug
+     */
+    public function category($slug)
+    {
+        $category = Category::where('slug', $slug)->firstOrFail();
+
+        $posts = $category->posts()->paginate(2);
+
+        return view('pages.list', ['posts' => $posts]);
     }
 }
