@@ -48,4 +48,10 @@ class AuthController extends Controller
         }
         return redirect()->back()->with('status', 'Wrong login and password');
     }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('/login');
+    }
 }

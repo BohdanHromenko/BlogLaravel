@@ -9,7 +9,9 @@
 
                     <div class="leave-comment mr0"><!--leave comment-->
                         @if (session('status'))
-                            {{session('status')}}
+                            <div class="alert alert-danger">
+                                {{session('status')}}
+                            </div>
                         @endif
                         <h3 class="text-uppercase">Login</h3>
                         @include('admin.errors')
