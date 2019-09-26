@@ -29,7 +29,7 @@ class Comment extends Model
      */
     public function author()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function allow()
@@ -48,7 +48,7 @@ class Comment extends Model
     {
         if ($this->status == 0)
         {
-            $this->allow();
+            return $this->allow();
         }
 
         return $this->disallow();
@@ -57,5 +57,10 @@ class Comment extends Model
     public function remove()
     {
         $this->delete();
+    }
+
+    public static function status()
+    {
+        return self::where('status', 0)->count();
     }
 }

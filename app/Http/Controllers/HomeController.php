@@ -51,6 +51,7 @@ class HomeController extends Controller
     public function show($slug)
     {
         $post = Post::where('slug', $slug)->firstOrFail();
+
         return view('pages.show')->with('post', $post);
     }
 
