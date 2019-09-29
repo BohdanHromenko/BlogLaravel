@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Category;
-use App\Post;
-use App\Tag;
+use App\Subscription;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class HomeController extends Controller
+class SubscribersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +15,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $posts = Post::where('status', Post::IS_PUBLIC)->orderBy('id', 'desc')->paginate(2);
+        $subs = Subscription::all();
 
-        return view('pages.index', compact('posts'));
+        return view('admin.subs.index')->with('subs', $subs);
     }
 
     /**
@@ -28,7 +27,7 @@ class HomeController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.subs.create');
     }
 
     /**
@@ -39,7 +38,13 @@ class HomeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'email' => 'required|email|unique:subscriptions'
+        ]);
+
+        Subscription::add($request->get('email'));
+
+        return redirect()->route('subscribers.index');
     }
 
     /**
@@ -48,11 +53,9 @@ class HomeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($slug)
+    public function show($id)
     {
-        $post = Post::where('slug', $slug)->firstOrFail();
-
-        return view('pages.show')->with('post', $post);
+        //
     }
 
     /**
@@ -86,30 +89,7 @@ class HomeController extends Controller
      */
     public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * @param $slug
-     */
-    public function tag($slug)
-    {
-        $tag = Tag::where('slug', $slug)->firstOrFail();
-
-        $posts = $tag->posts()->paginate(2);
-
-        return view('pages.list', ['posts' => $posts]);
-    }
-
-    /**
-     * @param $slug
-     */
-    public function category($slug)
-    {
-        $category = Category::where('slug', $slug)->firstOrFail();
-
-        $posts = $category->posts()->paginate(2);
-
-        return view('pages.list', ['posts' => $posts]);
+        Subscription::find($id)->delete();
+        return redirect()->route('subscribers.index');
     }
 }

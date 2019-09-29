@@ -6,8 +6,11 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Изменить статью
-                <small>приятные слова..</small>
+                @if ($post->status == 0)
+                   {{'Черновик'}}
+                @else
+                   {{'Опубликовано'}}
+                @endif
             </h1>
         </section>
 
@@ -83,7 +86,7 @@
                                 {{ Form::checkbox('status', '1', $post->status, ['class'=>'minimal']) }}
                             </label>
                             <label>
-                                Черновик
+                                Опубликовать
                             </label>
                         </div>
                     </div>

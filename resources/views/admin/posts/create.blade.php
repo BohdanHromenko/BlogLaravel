@@ -82,7 +82,7 @@
                                 <input type="checkbox" class="minimal" name="status">
                             </label>
                             <label>
-                                Черновик
+                                Опубликовать
                             </label>
                         </div>
                     </div>

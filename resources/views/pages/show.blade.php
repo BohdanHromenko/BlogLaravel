@@ -43,10 +43,8 @@
                     </article>
                     <div class="top-comment"><!--top comment-->
                         <img src="/images/comment.jpg" class="pull-left img-circle" alt="">
-                        <h4>Rubel Miah</h4>
-
-                        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy hello ro mod tempor
-                            invidunt ut labore et dolore magna aliquyam erat.</p>
+                        <h4>{{$post->author->name}}</h4>
+                        <p>{{$post->author->description}}</p>
                     </div><!--top comment end-->
                     <div class="row"><!--blog next previous-->
                         <div class="col-md-6">
