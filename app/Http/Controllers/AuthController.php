@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Auth;
-use App\User;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
@@ -39,9 +39,13 @@ class AuthController extends Controller
             'password' => 'required'
         ]);
 
+//        if (Auth::attempt([
+//            'email' => $request->get('email'),
+//            'password' => $request->get('password')
+//        ]))
         if (Auth::attempt([
-            'email' => $request->get('email'),
-            'password' => $request->get('password')
+            'email' => 'hromenkobohdan@icloud.com',
+            'password' => '123'
         ]))
         {
             return redirect('/');

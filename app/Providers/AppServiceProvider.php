@@ -2,9 +2,9 @@
 
 namespace App\Providers;
 
-use App\Category;
-use App\Comment;
-use App\Post;
+use App\Models\Category;
+use App\Models\Comment;
+use App\Models\Post;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider

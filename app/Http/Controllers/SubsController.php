@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\SubscribeEmail;
 use Mail;
-use App\Subscription;
+use App\Models\Subscription;
 use Illuminate\Http\Request;
 
 class SubsController extends Controller

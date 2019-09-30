@@ -1,11 +1,11 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 
-class Tag extends Model
+class Category extends Model
 {
     use Sluggable;
 
@@ -13,12 +13,7 @@ class Tag extends Model
 
     public function posts()
     {
-        return $this->belongsToMany(
-            Post::class,
-            'post_tags',
-            'tag_id',
-            'post_id'
-        );
+        return $this->hasMany(Post::class);
     }
 
     public function sluggable()
@@ -29,5 +24,4 @@ class Tag extends Model
             ]
         ];
     }
-
 }
