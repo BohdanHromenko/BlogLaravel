@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\PostCreateRequest;
+use App\Http\Requests\PostUpdateRequest;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class PostsController extends Controller
@@ -41,18 +42,11 @@ class PostsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  PostCreateRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostCreateRequest $request)
     {
-        $this->validate($request, [
-            'title' => 'required',
-            'content' => 'required',
-            'date' => 'required',
-            'image' => 'nullable|image'
-            ]);
-
         $post = Post::add($request->all());
         $post->uploadImage($request->file('image'));
         $post->setCategory($request->get('category_id'));
@@ -98,19 +92,12 @@ class PostsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  PostUpdateRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PostUpdateRequest $request, $id)
     {
-        $this->validate($request, [
-            'title' => 'required',
-            'content' => 'required',
-            'date' => 'required',
-            'image' => 'nullable|image'
-        ]);
-
         $post = Post::find($id);
         $post->edit($request->all());
         $post->uploadImage($request->file('image'));

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\SubscribersCreateRequest;
 use App\Models\Subscription;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -33,15 +34,11 @@ class SubscribersController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  SubscribersCreateRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SubscribersCreateRequest $request)
     {
-        $this->validate($request, [
-            'email' => 'required|email|unique:subscriptions'
-        ]);
-
         Subscription::add($request->get('email'));
 
         return redirect()->route('subscribers.index');
