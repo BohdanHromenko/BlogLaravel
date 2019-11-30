@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    use Sluggable;
+//    use Sluggable;
 
     const IS_DRAFT = 0;
     const IS_PUBLIC = 1;
@@ -42,13 +42,27 @@ class Post extends Model
         );
     }
 
-    public function sluggable()
+//    public function sluggable()
+//    {
+//        return [
+//            'slug' => [
+//                'source' => 'title'
+//            ]
+//        ];
+//    }
+
+    protected $casts = [
+        'published_at' => 'datetime',
+    ];
+
+    protected static function boot()
     {
-        return [
-            'slug' => [
-                'source' => 'title'
-            ]
-        ];
+        parent::boot();
+        static::creating(function ($post) {
+            if ( !$post->author_id ) {
+                $post->author_id = Auth::id();
+            }
+        });
     }
 
     public static function add($fields)
