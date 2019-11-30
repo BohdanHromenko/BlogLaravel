@@ -39,14 +39,14 @@ class AuthController extends Controller
             'password' => 'required'
         ]);
 
-//        if (Auth::attempt([
-//            'email' => $request->get('email'),
-//            'password' => $request->get('password')
-//        ]))
         if (Auth::attempt([
-            'email' => 'hromenkobohdan@icloud.com',
-            'password' => '123'
+            'email' => $request->get('email'),
+            'password' => $request->get('password')
         ]))
+//        if (Auth::attempt([
+//            'email' => 'hromenkobohdan@icloud.com',
+//            'password' => '123'
+//        ]))
         {
             return redirect('/');
         }
