@@ -110,7 +110,7 @@ class User extends Authenticatable
             return '/img/no-user-image.png';
         }
 
-        return '/uploads/' . $this->avatar;
+        return Storage::url($this->avatar);
     }
 
     public function makeAdmin()

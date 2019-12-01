@@ -5,12 +5,13 @@ namespace App\Nova;
 use Benjaminhirsch\NovaSlugField\Slug;
 use Benjaminhirsch\NovaSlugField\TextWithSlug;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\Trix;
+use Waynestate\Nova\CKEditor;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Post extends Resource
@@ -60,11 +61,10 @@ class Post extends Resource
             Slug::make('Slug')
                 ->creationRules('unique:posts,slug')
                 ->updateRules('unique:posts,slug,{{resourceId}}'),
-            Trix::make('Content'),
-            Text::make('Description'),
-            Image::make('image')
-                ->disk('public')
-                ->prunable(),
+
+            Text::make('Description')
+                ->hideFromIndex(),
+
             BelongsTo::make('Category', 'category'),
             BelongsTo::make('User', 'author'),
             Text::make('Views', function () {
@@ -72,8 +72,17 @@ class Post extends Resource
             })
                 ->onlyOnIndex(),
             DateTime::make('Published At', 'published_at')
-                ->format('MMM DD, YYYY, HH:MM:SS'),
+                ->format('MMM DD, YYYY, HH:MM:SS')
+                ->hideFromIndex(),
+            Boolean::make('Status'),
+            Boolean::make('Featured', 'is_featured'),
 
+            Image::make('image')
+                ->disk('public')
+                ->prunable()
+                ->hideFromIndex(),
+            CKEditor::make('Content')
+                ->hideFromIndex(),
 
         ];
     }
