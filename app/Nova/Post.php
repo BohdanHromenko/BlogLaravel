@@ -5,6 +5,7 @@ namespace App\Nova;
 use Benjaminhirsch\NovaSlugField\Slug;
 use Benjaminhirsch\NovaSlugField\TextWithSlug;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Image;
@@ -61,10 +62,18 @@ class Post extends Resource
                 ->updateRules('unique:posts,slug,{{resourceId}}'),
             Trix::make('Content'),
             Text::make('Description'),
-            Image::make('Image')
-                ->disk(env('FILESYSTEM_DRIVER'))
+            Image::make('image')
+                ->disk('public')
                 ->prunable(),
+            BelongsTo::make('Category', 'category'),
             BelongsTo::make('User', 'author'),
+            Text::make('Views', function () {
+                return $this->views;
+            })
+                ->onlyOnIndex(),
+            DateTime::make('Published At', 'published_at')
+                ->format('MMM DD, YYYY, HH:MM:SS'),
+
 
         ];
     }

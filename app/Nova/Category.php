@@ -4,6 +4,7 @@ namespace App\Nova;
 
 use Benjaminhirsch\NovaSlugField\Slug;
 use Benjaminhirsch\NovaSlugField\TextWithSlug;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -49,7 +50,7 @@ class Category extends Resource
                 ->slug('slug')
                 ->sortable(),
             Slug::make('Slug'),
-
+            HasMany::make('Posts'),
 
         ];
     }

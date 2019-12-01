@@ -14,7 +14,7 @@ class AddDateToPosts extends Migration
     public function up()
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->date('date')->nullable();
+            $table->date('published_at')->nullable();
         });
     }
 
@@ -26,7 +26,7 @@ class AddDateToPosts extends Migration
     public function down()
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->dropColumn('date');
+            $table->date('published_at');
         });
     }
 }
