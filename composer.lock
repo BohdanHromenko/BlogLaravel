@@ -4,8 +4,51 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f258f9d8d90a25c6bfaedf3e6ae7fdfe",
+    "content-hash": "826e7b435532b35d28e39f6d2c35a24c",
     "packages": [
+        {
+            "name": "benjacho/belongs-to-many-field",
+            "version": "1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Benjacho/belongs-to-many-field-nova.git",
+                "reference": "298615015eda29d905ec8d223861fa5c212da259"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Benjacho/belongs-to-many-field-nova/zipball/298615015eda29d905ec8d223861fa5c212da259",
+                "reference": "298615015eda29d905ec8d223861fa5c212da259",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Benjacho\\BelongsToManyField\\FieldServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Benjacho\\BelongsToManyField\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "belongsToMany nova representation in field.",
+            "keywords": [
+                "Many to Many Field",
+                "belongsToMany",
+                "laravel",
+                "nova"
+            ],
+            "time": "2019-11-30T01:36:09+00:00"
+        },
         {
             "name": "benjaminhirsch/nova-slug-field",
             "version": "1.2.4",

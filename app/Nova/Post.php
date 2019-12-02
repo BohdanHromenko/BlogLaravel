@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Text;
 use Waynestate\Nova\CKEditor;
+use Benjacho\BelongsToManyField\BelongsToManyField;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Post extends Resource
@@ -67,6 +68,11 @@ class Post extends Resource
 
             BelongsTo::make('Category', 'category'),
             BelongsTo::make('User', 'author'),
+
+            BelongsToManyField::make('Add Tags', 'tags', 'App\Nova\Tag')
+                ->optionsLabel('title')
+                ->hideFromIndex(),
+
             Text::make('Views', function () {
                 return $this->views;
             })
