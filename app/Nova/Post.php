@@ -7,6 +7,7 @@ use Benjaminhirsch\NovaSlugField\TextWithSlug;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\DateTime;
+use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Image;
@@ -89,6 +90,7 @@ class Post extends Resource
                 ->hideFromIndex(),
             CKEditor::make('Content')
                 ->hideFromIndex(),
+            HasMany::make('Comments'),
 
         ];
     }
@@ -101,7 +103,9 @@ class Post extends Resource
      */
     public function cards(Request $request)
     {
-        return [];
+        return [
+
+        ];
     }
 
     /**

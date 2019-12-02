@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * Class Comment
@@ -17,7 +18,7 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends Model
 {
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return BelongsTo
      */
     public function post()
     {
@@ -25,7 +26,7 @@ class Comment extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return BelongsTo
      */
     public function author()
     {
